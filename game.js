@@ -35,24 +35,45 @@ function playGame(computerPlay, userPlay) {
     return result;
 }
 
-function main() {
-    let userChoice = parseInt(prompt("Choice the number:\n1) Rock\n2) Paper\n3) Scissors"));
-    if (evalUserSel(userChoice) === false) {
-        console.log("WRONG INPUT");
+function checkWinner(computerScore, userScore) {
+    if (computerScore > userScore) {
+        return "COMPUTER WINS";
+    } else if (userScore > computerScore) {
+        return "YOU WIN";
     } else {
-        let computer = computerPlay();
-        let user = convertUserSel(userChoice);
-        let game = playGame(computer, user);
-        if (game === 1) {
-            console.log("Tie");
-        } else if (game === 2){
-            console.log(`You lost! Computer's ${computer.toUpperCase()} beats your ${user.toUpperCase()}.`);
-        } else {
-            console.log(`You won! Your ${user.toUpperCase()} beats computer's ${computer.toUpperCase()}.`);
-        }
+        return "NOBODY";
     }
 }
 
-main();
+function main() {
+    let userScore = 0;
+    let computerScore = 0;
+    let i = 0;
 
-//console.log(playGame(computerPlay(), userChoice));
+    while (userScore < 5 && computerScore < 5){
+        i++;
+        let userChoice = parseInt(prompt("Choice the number:\n1) Rock\n2) Paper\n3) Scissors"));
+        if (evalUserSel(userChoice) === false) {
+            console.log("WRONG INPUT");
+        } else {
+            console.log(`Round ${i}`)
+            let computer = computerPlay();
+            let user = convertUserSel(userChoice);
+            let game = playGame(computer, user);
+            if (game === 1) {
+                console.log("Tie");
+            } else if (game === 2){
+                console.log(`You lost! Computer's ${computer.toUpperCase()} beats your ${user.toUpperCase()}.`);
+                computerScore++;
+            } else {
+                console.log(`You won! Your ${user.toUpperCase()} beats computer's ${computer.toUpperCase()}.`);
+                userScore++;
+            }
+        }
+        console.log(`Your score is ${userScore}`);
+        console.log(`Computer's score is ${computerScore}`);
+    }
+    console.log(checkWinner(computerScore, userScore));
+}
+
+main();
