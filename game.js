@@ -38,10 +38,8 @@ function playGame(computerPlay, userPlay) {
 function checkWinner(computerScore, userScore) {
     if (computerScore > userScore) {
         return "COMPUTER WINS";
-    } else if (userScore > computerScore) {
-        return "YOU WIN";
     } else {
-        return "NOBODY";
+        return "YOU WIN"
     }
 }
 
